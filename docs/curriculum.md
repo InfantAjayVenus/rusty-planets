@@ -9,7 +9,7 @@
 Goal: Open a window and confirm macroquad works.
 - [x] Step 1.1: Add macroquad dependency to Cargo.toml
 - [x] Step 1.2: Replace main.rs with a macroquad game loop that opens a black window
-- [ ] Step 1.3: Draw a yellow circle (the sun) at the center of the screen
+- [x] Step 1.3: Draw a yellow circle (the sun) at the center of the screen
 
 ## Module 2: The Planet Struct
 Goal: Define data for a single planet and draw it.
