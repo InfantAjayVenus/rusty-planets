@@ -4,6 +4,13 @@ use macroquad::prelude::*;
 async fn main() {
    loop {
        clear_background(BLACK);
+
+       let sun_radius = 30.0;
+       let cx = (screen_width() / 2.0) - sun_radius;
+       let cy = (screen_height() / 2.0) - sun_radius;
+
+       draw_circle(cx, cy, sun_radius, YELLOW);
+
        next_frame().await;
    } 
 }
