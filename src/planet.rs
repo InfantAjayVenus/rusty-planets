@@ -20,6 +20,12 @@ impl Planet {
     }
 
     pub fn draw(&self) {
-        draw_circle(self.position.x, self.position.y, self.radius, self.color);
+        let cx = screen_width() / 2.0;
+        let cy = screen_height() / 2.0;
+        draw_circle(self.position.x + cx, self.position.y + cy, self.radius, self.color);
+    }
+
+    pub fn update(&mut self) {
+        self.position += self.velocity;
     }
 }
