@@ -1,3 +1,5 @@
+use std::collections::VecDeque;
+
 use macroquad::prelude::*;
 
 pub struct Planet {
@@ -7,6 +9,7 @@ pub struct Planet {
     pub velocity: Vec2,
     radius: f32,
     is_fixed: bool,
+    trail: VecDeque<Vec2>,
 }
 
 impl Planet {
@@ -18,6 +21,7 @@ impl Planet {
             color,
             radius: mass.sqrt() * 2.0,
             is_fixed: false,
+            trail: VecDeque::new(),
         }
     }
 
@@ -34,6 +38,8 @@ impl Planet {
             self.radius,
             self.color,
         );
+
+        self.draw_trail(cx, cy);
     }
 
     pub fn update_velocity(&mut self, force: &Vec2) {
@@ -43,6 +49,25 @@ impl Planet {
     pub fn update_position(&mut self) {
         if !self.is_fixed {
             self.position += self.velocity;
+            self.update_trail();
+        }
+    }
+
+    fn update_trail(&mut self) {
+        const TRAIL_LEN: usize = 120;
+        self.trail.push_back(self.position);
+
+        if self.trail.len() > TRAIL_LEN  {
+            self.trail.pop_front();
+        }
+    }
+
+    fn draw_trail(&self, cx: f32, cy: f32) {
+        for (i,pos) in self.trail.iter().enumerate() {
+            let alpha = i as f32 / self.trail.len() as f32;
+            let trail_color = Color::new(self.color.r, self.color.g, self.color.b, alpha);
+
+            draw_circle(cx + pos.x, cy + pos.y, 1.0, trail_color);
         }
     }
 }
