@@ -22,8 +22,8 @@ Goal: Define data for a single planet and draw it.
 Goal: Make the planet orbit the sun using gravitational force.
 - [x] Step 3.1: Implement a `gravitational_force` function (Newton's law)
 - [x] Step 3.2: Apply the force to update the planet's velocity each frame
-- [ ] Step 3.3: Watch a stable orbit form with the right initial conditions
-- [ ] Step 3.4: Checkpoint — understanding vectors and force application
+- [x] Step 3.3: Watch a stable orbit form with the right initial conditions
+- [x] Step 3.4: Checkpoint — understanding vectors and force application
 
 ## Module 4: N-Body Simulation
 Goal: Add multiple planets that all attract each other.
