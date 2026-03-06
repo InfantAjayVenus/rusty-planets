@@ -15,12 +15,12 @@ Goal: Open a window and confirm macroquad works.
 Goal: Define data for a single planet and draw it.
 - [x] Step 2.1: Create a `Planet` struct with position, velocity, mass, and color
 - [x] Step 2.2: Instantiate one planet and draw it on screen
-- [ ] Step 2.3: Give the planet a starting velocity so it moves each frame
-- [ ] Step 2.4: Checkpoint — understanding structs and the game loop
+- [x] Step 2.3: Give the planet a starting velocity so it moves each frame
+- [x] Step 2.4: Checkpoint — understanding structs and the game loop
 
 ## Module 3: Gravity
 Goal: Make the planet orbit the sun using gravitational force.
-- [ ] Step 3.1: Implement a `gravitational_force` function (Newton's law)
+- [x] Step 3.1: Implement a `gravitational_force` function (Newton's law)
 - [ ] Step 3.2: Apply the force to update the planet's velocity each frame
 - [ ] Step 3.3: Watch a stable orbit form with the right initial conditions
 - [ ] Step 3.4: Checkpoint — understanding vectors and force application
