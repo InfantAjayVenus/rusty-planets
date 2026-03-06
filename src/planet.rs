@@ -53,6 +53,15 @@ impl Planet {
         }
     }
 
+    fn draw_trail(&self, cx: f32, cy: f32) {
+        for (i,pos) in self.trail.iter().enumerate() {
+            let alpha = i as f32 / self.trail.len() as f32;
+            let trail_color = Color::new(self.color.r, self.color.g, self.color.b, alpha);
+
+            draw_circle(cx + pos.x, cy + pos.y, 1.0, trail_color);
+        }
+    }
+
     fn update_trail(&mut self) {
         const TRAIL_LEN: usize = 120;
         self.trail.push_back(self.position);
