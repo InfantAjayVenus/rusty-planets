@@ -3,9 +3,10 @@ use macroquad::prelude::*;
 pub struct Planet {
     pub mass: f32,
     pub color: Color,
-    pub radius: f32,
     pub position: Vec2,
     pub velocity: Vec2,
+    radius: f32,
+    is_fixed: bool,
 }
 
 impl Planet {
@@ -16,7 +17,12 @@ impl Planet {
             mass,
             color,
             radius: mass.sqrt() * 2.0,
+            is_fixed: false,
         }
+    }
+
+    pub fn set_fixed(&mut self) {
+        self.is_fixed = true;
     }
 
     pub fn draw(&self) {
@@ -35,7 +41,9 @@ impl Planet {
     }
 
     pub fn update_position(&mut self) {
-        self.position += self.velocity;
+        if !self.is_fixed {
+            self.position += self.velocity;
+        }
     }
 }
 
@@ -43,7 +51,8 @@ pub fn gravity(first_body: &Planet, second_body: &Planet) -> Vec2 {
     const GRAVITATIONAL_CONSTANT: f32 = 500.0;
     let direction = second_body.position - first_body.position;
     let distance = direction.length().max(100.0);
-    let force_value = GRAVITATIONAL_CONSTANT * first_body.mass * second_body.mass / distance.powf(2.0);
+    let force_value =
+        GRAVITATIONAL_CONSTANT * first_body.mass * second_body.mass / distance.powf(2.0);
 
     direction.normalize() * force_value
 }
