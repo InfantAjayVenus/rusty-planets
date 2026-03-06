@@ -22,10 +22,28 @@ impl Planet {
     pub fn draw(&self) {
         let cx = screen_width() / 2.0;
         let cy = screen_height() / 2.0;
-        draw_circle(self.position.x + cx, self.position.y + cy, self.radius, self.color);
+        draw_circle(
+            self.position.x + cx,
+            self.position.y + cy,
+            self.radius,
+            self.color,
+        );
     }
 
-    pub fn update(&mut self) {
+    pub fn update_velocity(&mut self, force: &Vec2) {
+        self.velocity += *force / self.mass;
+    }
+
+    pub fn update_position(&mut self) {
         self.position += self.velocity;
     }
+}
+
+pub fn gravity(first_body: &Planet, second_body: &Planet) -> Vec2 {
+    const GRAVITATIONAL_CONSTANT: f32 = 500.0;
+    let direction = second_body.position - first_body.position;
+    let distance = direction.length().max(100.0);
+    let force_value = GRAVITATIONAL_CONSTANT * first_body.mass * second_body.mass / distance.powf(2.0);
+
+    direction.normalize() * force_value
 }

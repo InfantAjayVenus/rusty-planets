@@ -1,6 +1,7 @@
 mod planet;
 use macroquad::prelude::*;
 use planet::Planet;
+use planet::gravity;
 
 #[macroquad::main("Rusty Planets")]
 async fn main() {
@@ -12,7 +13,9 @@ async fn main() {
 
         sun.draw();
 
-        earth.update();
+        let force = gravity(&earth, &sun);
+        earth.update_velocity(&force);
+        earth.update_position();
         earth.draw();
 
         next_frame().await;
