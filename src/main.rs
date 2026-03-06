@@ -6,17 +6,32 @@ use planet::gravity;
 #[macroquad::main("Rusty Planets")]
 async fn main() {
     let sun = Planet::new(vec2(0.0, 0.0), vec2(0.0, 0.0), 255.0, YELLOW);
-    let mut earth = Planet::new(vec2(150.0, 0.0), vec2(0.0, 30.0), 10.0, BLUE);
+    let earth = Planet::new(vec2(150.0, 0.0), vec2(0.0, 30.0), 10.0, BLUE);
+
+    let mut bodies = vec![sun, earth];
 
     loop {
         clear_background(BLACK);
 
-        sun.draw();
+        let forces: Vec<Vec2> = (0..bodies.len())
+            .map(|i| {
+                let mut total = Vec2::ZERO;
+                for j in 0..bodies.len() {
+                    if i != j {
+                        total += gravity(&bodies[i], &bodies[j]);
+                    }
+                }
+                total
+            })
+            .collect();
 
-        let force = gravity(&earth, &sun);
-        earth.update_velocity(&force);
-        earth.update_position();
-        earth.draw();
+        for (body, force) in bodies.iter_mut().zip(forces.iter()) {
+            body.update_velocity(force);
+            body.update_position();
+            body.draw();
+        }
+
+
 
         next_frame().await;
     }
