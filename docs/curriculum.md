@@ -13,7 +13,7 @@ Goal: Open a window and confirm macroquad works.
 
 ## Module 2: The Planet Struct
 Goal: Define data for a single planet and draw it.
-- [ ] Step 2.1: Create a `Planet` struct with position, velocity, mass, and color
+- [x] Step 2.1: Create a `Planet` struct with position, velocity, mass, and color
 - [ ] Step 2.2: Instantiate one planet and draw it on screen
 - [ ] Step 2.3: Give the planet a starting velocity so it moves each frame
 - [ ] Step 2.4: Checkpoint — understanding structs and the game loop
