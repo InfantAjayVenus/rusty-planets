@@ -27,9 +27,9 @@ Goal: Make the planet orbit the sun using gravitational force.
 
 ## Module 4: N-Body Simulation
 Goal: Add multiple planets that all attract each other.
-- [ ] Step 4.1: Store planets in a `Vec<Planet>`
-- [ ] Step 4.2: Calculate forces between every pair of planets
-- [ ] Step 4.3: Add the sun as a special heavy body in the planet list
+- [x] Step 4.1: Store planets in a `Vec<Planet>`
+- [x] Step 4.2: Calculate forces between every pair of planets
+- [x] Step 4.3: Add the sun as a special heavy body in the planet list
 - [ ] Step 4.4: Tune masses and initial velocities for stable-ish orbits
 - [ ] Step 4.5: Checkpoint — understanding Vec iteration and Rust borrow rules
 
