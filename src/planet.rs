@@ -58,7 +58,7 @@ impl Planet {
 
     fn draw_label(&self, cx: f32, cy:f32) {
         let speed = self.velocity.length();
-        let label = format!("{}\n({:.1})", self.name, speed);
+        let label = format!("{} ({:.1})", self.name, speed);
 
         draw_text(&label, self.position.x + cx + self.radius + 4.0, self.position.y + cy + self.radius, 14.0, self.color);
     }
