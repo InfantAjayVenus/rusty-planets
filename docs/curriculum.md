@@ -21,7 +21,7 @@ Goal: Define data for a single planet and draw it.
 ## Module 3: Gravity
 Goal: Make the planet orbit the sun using gravitational force.
 - [x] Step 3.1: Implement a `gravitational_force` function (Newton's law)
-- [ ] Step 3.2: Apply the force to update the planet's velocity each frame
+- [x] Step 3.2: Apply the force to update the planet's velocity each frame
 - [ ] Step 3.3: Watch a stable orbit form with the right initial conditions
 - [ ] Step 3.4: Checkpoint — understanding vectors and force application
 
