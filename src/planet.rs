@@ -7,14 +7,16 @@ pub struct Planet {
     pub color: Color,
     pub position: Vec2,
     pub velocity: Vec2,
+    pub name: String,
     radius: f32,
     is_fixed: bool,
     trail: VecDeque<Vec2>,
 }
 
 impl Planet {
-    pub fn new(position: Vec2, velocity: Vec2, mass: f32, color: Color) -> Planet {
+    pub fn new(name: &str, position: Vec2, velocity: Vec2, mass: f32, color: Color) -> Planet {
         Planet {
+            name: name.to_string(),
             position,
             velocity,
             mass,
@@ -38,6 +40,7 @@ impl Planet {
             self.radius,
             self.color,
         );
+        self.draw_label(cx, cy);
 
         self.draw_trail(cx, cy);
     }
@@ -51,6 +54,13 @@ impl Planet {
             self.position += self.velocity;
             self.update_trail();
         }
+    }
+
+    fn draw_label(&self, cx: f32, cy:f32) {
+        let speed = self.velocity.length();
+        let label = format!("{}\n({:.1})", self.name, speed);
+
+        draw_text(&label, self.position.x + cx + self.radius + 4.0, self.position.y + cy + self.radius, 14.0, self.color);
     }
 
     fn draw_trail(&self, cx: f32, cy: f32) {
@@ -71,14 +81,7 @@ impl Planet {
         }
     }
 
-    fn draw_trail(&self, cx: f32, cy: f32) {
-        for (i,pos) in self.trail.iter().enumerate() {
-            let alpha = i as f32 / self.trail.len() as f32;
-            let trail_color = Color::new(self.color.r, self.color.g, self.color.b, alpha);
 
-            draw_circle(cx + pos.x, cy + pos.y, 1.0, trail_color);
-        }
-    }
 }
 
 pub fn gravity(first_body: &Planet, second_body: &Planet) -> Vec2 {
