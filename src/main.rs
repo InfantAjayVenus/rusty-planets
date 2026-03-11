@@ -17,6 +17,7 @@ async fn main() {
     let mut bodies = initial_bodies.clone();
 
     loop {
+        // Play / Pause
         if is_key_pressed(KeyCode::Space) {
             if speed == 0 {
                 speed = 1;
@@ -25,15 +26,18 @@ async fn main() {
             }
         }
 
+        // Reset
         if is_key_pressed(KeyCode::R) {
             speed = 0;
             bodies = initial_bodies.clone();
         }
 
+        //Speed up
         if is_key_pressed(KeyCode::K) {
             speed = (speed * 2).min(16);
         }
 
+        // Slow Down
         if is_key_pressed(KeyCode::J) {
             speed = (speed / 2).max(1);
         }
