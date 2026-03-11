@@ -2,6 +2,7 @@ use std::collections::VecDeque;
 
 use macroquad::prelude::*;
 
+#[derive(Clone)]
 pub struct Planet {
     pub mass: f32,
     pub color: Color,
