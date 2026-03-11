@@ -37,5 +37,5 @@ Goal: Add multiple planets that all attract each other.
 Goal: Make the simulation beautiful and informative.
 - [x] Step 5.1: Add orbit trails (store last N positions per planet)
 - [x] Step 5.2: Display planet names and stats with macroquad's text API
-- [ ] Step 5.3: Add keyboard controls (speed up/slow down, reset)
+- [x] Step 5.3: Add keyboard controls (speed up/slow down, reset)
 - [ ] Step 5.4: Handle planet collisions (merge them)
