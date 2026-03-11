@@ -51,7 +51,7 @@ The app starts paused. Internally, the speed value controls how many physics ste
 
 ## Physics Notes
 
-Gravity is implemented in [src/planet.rs](/home/ajay_v/DevSpace/learning/rusty-planets/src/planet.rs).
+Gravity is implemented in [src/planet.rs](./src/planet.rs).
 
 - Force model: `F = G * m1 * m2 / r^2`
 - Gravitational constant: `500.0`
@@ -63,12 +63,12 @@ The sun is marked as fixed, so it still exerts gravity but does not move.
 
 ## Project Layout
 
-- [src/main.rs](/home/ajay_v/DevSpace/learning/rusty-planets/src/main.rs): window loop, controls, initial bodies, force accumulation, simulation update
-- [src/planet.rs](/home/ajay_v/DevSpace/learning/rusty-planets/src/planet.rs): `Planet` struct, drawing, labels, trails, gravity helper
-- [docs/curriculum.md](/home/ajay_v/DevSpace/learning/rusty-planets/docs/curriculum.md): step-by-step learning roadmap for the project
+- [src/main.rs](./src/main.rs): window loop, controls, initial bodies, force accumulation, simulation update
+- [src/planet.rs](./src/planet.rs): `Planet` struct, drawing, labels, trails, gravity helper
+- [docs/curriculum.md](./docs/curriculum.md): step-by-step learning roadmap for the project
 
 ## Current Limitations
 
 - No collision handling yet
 - Parameters are tuned for visual behavior, not realism
-- The curriculum still lists collision support as unfinished in [docs/curriculum.md](/home/ajay_v/DevSpace/learning/rusty-planets/docs/curriculum.md)
+- The curriculum still lists collision support as unfinished in [docs/curriculum.md](./docs/curriculum.md)
