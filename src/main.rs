@@ -15,12 +15,12 @@ async fn main() {
     let mut bodies = vec![sun, earth, mars, jupiter];
 
     loop {
-        if is_key_pressed(KeyCode::K) && speed <= 16 {
-            speed *= 2;
+        if is_key_pressed(KeyCode::K) {
+            speed = (speed * 2).min(16);
         }
 
-        if is_key_pressed(KeyCode::J) && speed >= 2 {
-            speed /= 2;
+        if is_key_pressed(KeyCode::J) {
+            speed = (speed / 2).max(1);
         }
 
         clear_background(BLACK);
