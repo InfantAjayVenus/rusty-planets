@@ -1,71 +1,74 @@
 # Rusty Planets
 
-`rusty-planets` is a small Rust + `macroquad` gravity sandbox. It draws a fixed sun and a few moving planets, then updates them with a simple N-body simulation each frame.
+`rusty-planets` is a small Rust learning project built with `macroquad`. It renders a simple 2D gravity sandbox with a fixed sun, several orbiting bodies, and lightweight controls for pausing, resetting, and changing simulation speed.
 
-## What It Does
+## Overview
 
-- Opens a real-time 2D `macroquad` window
-- Simulates gravity between all bodies
-- Keeps the sun fixed at the center of the system
-- Draws orbit trails for moving planets
-- Shows each planet's name and current speed
-- Supports pause, reset, and simulation speed controls
+The app currently starts with four bodies:
 
-## Current Scene
-
-The default setup includes four bodies defined in [src/main.rs](/home/ajay_v/DevSpace/learning/rusty-planets/src/main.rs):
-
-- `Sun`: fixed, mass `255.0`
+- `Sun`: fixed at the center, mass `255.0`
 - `Earth`: position `(150, 0)`, velocity `(0, 30)`
 - `Mars`: position `(280, 0)`, velocity `(0, 1.5)`
 - `Jupiter`: position `(450, 0)`, velocity `(0, 19.1)`
 
-## Controls
+Each frame, the simulation:
 
-- `Space`: toggle pause and play
-- `R`: reset to the initial planet layout and pause
-- `K`: double the simulation speed, up to `16x`
-- `J`: halve the simulation speed, down to `1x`
+- computes gravitational force between every pair of bodies
+- updates velocity from the summed force
+- updates position for non-fixed bodies
+- draws the bodies, motion trails, and a label with each body's name and current speed
 
-The simulation starts paused. Internally, speed `0` means paused and `1..16` controls how many physics steps run per frame.
+This is intentionally a lightweight sandbox, not a physically accurate orbital simulator.
 
 ## Run
 
 Requirements:
 
-- Rust toolchain with `cargo`
+- Rust toolchain
+- `cargo`
 
-Start the app:
+Start the app with:
 
 ```bash
 cargo run
 ```
 
-This opens a window titled `Rusty Planets`.
+This opens a `macroquad` window titled `Rusty Planets`.
 
-## Physics Model
+## Controls
 
-Gravity is implemented in [src/planet.rs](/home/ajay_v/DevSpace/learning/rusty-planets/src/planet.rs) with a simplified Newtonian force:
+- `Space`: toggle pause and play
+- `R`: reset to the initial layout and pause
+- `K`: double simulation speed, up to `16x`
+- `J`: halve simulation speed, down to `1x`
 
-- `F = G * m1 * m2 / r^2`
-- `G = 500.0`
-- Distance is clamped to a minimum of `100.0`
+The app starts paused. Internally, the speed value controls how many physics steps run per rendered frame:
 
-Other details:
+- `0`: paused
+- `1..16`: active simulation speed
 
-- Planet radius is derived from mass: `sqrt(mass) * 2.0`
-- Velocity is updated from force each simulation step
-- Fixed bodies do not move, but still exert gravity
-- Trails store the last `120` positions for each moving body
+`J` and `K` only affect the simulation while it is running.
+
+## Physics Notes
+
+Gravity is implemented in [src/planet.rs](/home/ajay_v/DevSpace/learning/rusty-planets/src/planet.rs).
+
+- Force model: `F = G * m1 * m2 / r^2`
+- Gravitational constant: `500.0`
+- Distance clamp: `100.0` minimum, to avoid extreme forces at very short range
+- Planet radius: `sqrt(mass) * 2.0`
+- Trail length: last `120` recorded positions
+
+The sun is marked as fixed, so it still exerts gravity but does not move.
 
 ## Project Layout
 
-- [src/main.rs](/home/ajay_v/DevSpace/learning/rusty-planets/src/main.rs): simulation loop, controls, body setup, force accumulation
-- [src/planet.rs](/home/ajay_v/DevSpace/learning/rusty-planets/src/planet.rs): `Planet` struct, drawing, trail logic, gravity calculation
-- [docs/curriculum.md](/home/ajay_v/DevSpace/learning/rusty-planets/docs/curriculum.md): learning roadmap for the project
+- [src/main.rs](/home/ajay_v/DevSpace/learning/rusty-planets/src/main.rs): window loop, controls, initial bodies, force accumulation, simulation update
+- [src/planet.rs](/home/ajay_v/DevSpace/learning/rusty-planets/src/planet.rs): `Planet` struct, drawing, labels, trails, gravity helper
+- [docs/curriculum.md](/home/ajay_v/DevSpace/learning/rusty-planets/docs/curriculum.md): step-by-step learning roadmap for the project
 
-## Notes
+## Current Limitations
 
-- This is a lightweight learning project, not a physically accurate orbital simulator.
-- There is no collision handling yet.
-- The curriculum checklist in [docs/curriculum.md](/home/ajay_v/DevSpace/learning/rusty-planets/docs/curriculum.md) still shows some controls-related steps as incomplete even though the current code already includes pause, reset, and speed controls.
+- No collision handling yet
+- Parameters are tuned for visual behavior, not realism
+- The curriculum still lists collision support as unfinished in [docs/curriculum.md](/home/ajay_v/DevSpace/learning/rusty-planets/docs/curriculum.md)
