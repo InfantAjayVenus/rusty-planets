@@ -5,7 +5,7 @@ use planet::gravity;
 
 #[macroquad::main("Rusty Planets")]
 async fn main() {
-    let mut speed: u32 = 1;
+    let mut speed: u32 = 0;
     let mut sun = Planet::new("Sun", vec2(0.0, 0.0), vec2(0.0, 0.0), 255.0, YELLOW);
     sun.set_fixed();
     let earth = Planet::new("Earth", vec2(150.0, 0.0), vec2(0.0, 30.0), 10.0, BLUE);
@@ -15,6 +15,13 @@ async fn main() {
     let mut bodies = vec![sun, earth, mars, jupiter];
 
     loop {
+        if is_key_pressed(KeyCode::Space) {
+            if speed == 0 {
+                speed = 1;
+            } else {
+                speed = 0;
+            }
+        }
         if is_key_pressed(KeyCode::K) {
             speed = (speed * 2).min(16);
         }
