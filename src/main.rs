@@ -12,7 +12,7 @@ async fn main() {
     let mars = Planet::new("Mars", vec2(280.0, 0.0), vec2(0.0, 1.5), 6.0, RED);
     let jupiter = Planet::new("Jupiter", vec2(450.0, 0.0), vec2(0.0, 19.1), 80.0, ORANGE);
 
-    let  initial_bodies = vec![sun, earth, mars, jupiter];
+    let initial_bodies = vec![sun, earth, mars, jupiter];
 
     let mut bodies = initial_bodies.clone();
 
@@ -32,14 +32,16 @@ async fn main() {
             bodies = initial_bodies.clone();
         }
 
-        //Speed up
-        if is_key_pressed(KeyCode::K) {
-            speed = (speed * 2).min(16);
-        }
+        if speed > 0 {
+            //Speed up
+            if is_key_pressed(KeyCode::K) {
+                speed = (speed * 2).min(16);
+            }
 
-        // Slow Down
-        if is_key_pressed(KeyCode::J) {
-            speed = (speed / 2).max(1);
+            // Slow Down
+            if is_key_pressed(KeyCode::J) {
+                speed = (speed / 2).max(1);
+            }
         }
 
         clear_background(BLACK);
